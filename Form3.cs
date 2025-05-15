@@ -19,9 +19,13 @@ namespace Tennis_Score_App
         private (string, int) competitor = new();
 
 
-        public Form3(string playerName, object v)
+        public Form3(string playerName, Dictionary<(string, int), List<(string, int)>> games)
         {
             InitializeComponent();
+            this.playerName = playerName;
+            this.games = games;
+            this.PlayerName.Text = playerName;
+            FillVictoriesAndLossesListViews();
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -97,25 +101,19 @@ namespace Tennis_Score_App
 
         private ListView GetCurrentListView(int currentPlayerPoints, int competitorPoints)
         {
-            if(currentPlayerPoints == competitorPoints)
-            {
+            if (currentPlayerPoints > competitorPoints)
                 return this.listViewVictories;
-            }
-            else if (competitorPoints == currentPlayerPoints)
-            {
+            else if (currentPlayerPoints < competitorPoints)
                 return this.listViewLosses;
-            }
-
-            return this.listViewDraw;
+            else
+                return this.listViewDraw;
         }
 
-        private void AddDataToListView(string competitor, string score, ListView ListView)
+        private void AddDataToListView(string competitor, string score, ListView listView)
         {
-            ListViewItem listViewItem = new ListViewItem();
-
-            listViewItem.SubItems[0].Text = competitor;
+            var listViewItem = new ListViewItem(competitor);
             listViewItem.SubItems.Add(score);
-            ListView.Items.Add(listViewItem);
+            listView.Items.Add(listViewItem);
         }
 
 

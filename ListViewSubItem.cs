@@ -5,9 +5,11 @@ namespace Tennis_Score_App
     {
         public string Text { get; internal set; }
 
+
         public static implicit operator ListViewSubItem(ListViewItem.ListViewSubItem v)
         {
-            throw new NotImplementedException();
+            return new ListViewSubItem { Text = v.Text };
         }
+
     }
 }

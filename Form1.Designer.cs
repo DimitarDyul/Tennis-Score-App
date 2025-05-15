@@ -2,6 +2,8 @@
 {
     partial class Form1
     {
+        
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -87,7 +89,8 @@
             listViewRanking.TabIndex = 6;
             listViewRanking.UseCompatibleStateImageBehavior = false;
             listViewRanking.View = View.Details;
-            listViewRanking.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            listViewRanking.SelectedIndexChanged += listViewRanking_SelectedIndexChanged;
+
             // 
             // columnHeader1
             // 

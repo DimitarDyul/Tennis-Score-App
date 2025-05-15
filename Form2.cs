@@ -30,27 +30,28 @@ namespace Tennis_Score_App
             string secondPlayerName = secondPlayerbox.Text.Trim();
             int secondPlayerPoints = (int)splayernumericUpDown2.Value;
 
-            if (!CheckIfInputsAreValid())
-            {
-                this.DialogResult = DialogResult.OK;
+            // Assign first, so validation checks the right values
+            FirstPlayer = (firstPlayerName, firstPlayerPoints);
+            SecondPlayer = (secondPlayerName, secondPlayerPoints);
 
-            }
-            else
+            if (!CheckIfInputsAreValid())
             {
                 ValidateChildren(ValidationConstraints.Enabled);
                 return;
-
             }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private bool CheckIfInputsAreValid()
             => !CheckIfPlayerNamesAreEmpty() && !CheckIfPlayerNamesAreSame();
 
         private bool CheckIfPlayerNamesAreEmpty()
-            => string.IsNullOrEmpty(this.FirstPlayer.Item1) || string.IsNullOrEmpty(this.SecondPlayer.Item1);
+            => string.IsNullOrWhiteSpace(this.FirstPlayer.Item1) || string.IsNullOrWhiteSpace(this.SecondPlayer.Item1);
 
         private bool CheckIfPlayerNamesAreSame()
-            => string.IsNullOrEmpty(this.FirstPlayer.Item1) || string.IsNullOrEmpty(this.SecondPlayer.Item1);
+            => this.FirstPlayer.Item1.Equals(this.SecondPlayer.Item1, StringComparison.OrdinalIgnoreCase);
 
 
         private void label2_Click(object sender, EventArgs e)

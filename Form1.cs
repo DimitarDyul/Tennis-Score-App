@@ -34,6 +34,16 @@ namespace Tennis_Score_App
 
         private static Dictionary<string, int> playerWithPoints = new();
 
+        private void listViewRanking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Only open if a row is actually selected
+            if (this.listViewRanking.SelectedItems.Count > 0)
+            {
+                ViewProfileButtonClick();
+            }
+        }
+
+
 
         private void OnLoad(object sender, EventArgs e)
         {
@@ -46,7 +56,7 @@ namespace Tennis_Score_App
         {
             this.listViewRanking.Items.Clear();
 
-            foreach (var player in playerWithPoints.OrderByDescending(x => x.Value))
+            foreach (var player in playersWithPoints.OrderByDescending(x => x.Value))
             {
                 string playerName = player.Key;
                 string playerPoints = player.Value.ToString();
@@ -57,10 +67,7 @@ namespace Tennis_Score_App
                 rollInRankingListView.SubItems.Add(playerPoints);
 
                 this.listViewRanking.Items.Add(rollInRankingListView);
-
-
             }
-
         }
 
         private static Dictionary<string, int> playersWithPoints = new();
